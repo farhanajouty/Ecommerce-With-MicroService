@@ -9,6 +9,7 @@ D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\AutoMapper.d
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Azure.Core.dll
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Azure.Identity.dll
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Humanizer.dll
+D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Microsoft.Build.Locator.dll
 D:\Personal_project\Mango\Mango.Services.CouponAPI\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
