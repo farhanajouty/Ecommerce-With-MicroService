@@ -22,6 +22,7 @@ namespace Mango.Services.CouponAPI.Migrations
                 });
         }
 
+
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
