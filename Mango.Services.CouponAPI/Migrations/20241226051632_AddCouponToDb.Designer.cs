@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mango.Services.CouponAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241225115250_SeedCouponTables")]
-    partial class SeedCouponTables
+    [Migration("20241226051632_AddCouponToDb")]
+    partial class AddCouponToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

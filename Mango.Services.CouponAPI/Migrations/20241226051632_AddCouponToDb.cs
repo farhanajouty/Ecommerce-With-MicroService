@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Mango.Services.CouponAPI.Migrations
 {
     /// <inheritdoc />
@@ -23,6 +25,15 @@ namespace Mango.Services.CouponAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Coupons", x => x.CouponId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Coupons",
+                columns: new[] { "CouponId", "CouponCode", "DiscountAmount", "MinAmount" },
+                values: new object[,]
+                {
+                    { 1, "10OFF", 10, 20 },
+                    { 2, "20OFF", 20, 40 }
                 });
         }
 
