@@ -44,7 +44,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
 
         [HttpGet]
-        [Route("{id :int}")]
+        [Route("{id:int}")]
         public ResponseDto Get(int id)
         {
             try
@@ -127,6 +127,7 @@ namespace Mango.Services.CouponAPI.Controllers
 
 
         [HttpDelete]
+        [Route("{id:int}")]
         public ResponseDto Delete(int id)
         {
             try
