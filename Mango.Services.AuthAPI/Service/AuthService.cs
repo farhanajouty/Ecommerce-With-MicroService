@@ -11,13 +11,31 @@ namespace Mango.Services.AuthAPI.Service
         private readonly AppDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
-        public AuthService(AppDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        public AuthService(AppDbContext db,IJwtTokenGenerator jwtTokenGenerator, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
 
-            _db = db;
-            _userManager = userManager;
-           _roleManager = roleManager;
+             _db = db;
+             _userManager = userManager;
+             _roleManager = roleManager;
+             _jwtTokenGenerator = jwtTokenGenerator;
+        }
+
+        public async Task<bool> AssignRole(string email, string roleName)
+        {
+            var user = _db.ApplicationUsers.FirstOrDefault(u=>u.Email.ToLower()==email.ToLower());
+            if (user != null)
+            {
+                if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+                {
+                    //Create a role if not exits
+                    _roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
+                }
+                await _userManager.AddToRoleAsync(user, roleName);
+                return true;
+                
+
+            }return false;
         }
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequest)
@@ -25,7 +43,7 @@ namespace Mango.Services.AuthAPI.Service
             var user = _db.ApplicationUsers.FirstOrDefault(t => t.UserName.ToLower() ==loginRequest.UserName.ToLower());
             bool isValid = await _userManager.CheckPasswordAsync(user,loginRequest.Password);
 
-            if (user != null || isValid == false)
+            if (user == null || isValid == false)
             {
                 return new LoginResponseDto()
                 {
@@ -33,7 +51,7 @@ namespace Mango.Services.AuthAPI.Service
                     Token = ""
                 };
              }
-
+            var token = _jwtTokenGenerator.GenerateToken(user);
             UserDto userDto = new()
             {
                 Name = user.UserName,
@@ -48,7 +66,7 @@ namespace Mango.Services.AuthAPI.Service
             {
 
                 User = userDto,
-                Token = ""
+                Token = token
             };
 
             return loginResponseDto;

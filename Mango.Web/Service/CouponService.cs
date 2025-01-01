@@ -9,7 +9,7 @@ namespace Mango.Web.Service
     {
         private readonly IBaseService _baseService;
         public CouponService(IBaseService baseService) { 
-        _baseService = baseService;
+           _baseService = baseService;
         
         }
 
